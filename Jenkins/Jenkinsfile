@@ -2,45 +2,32 @@ pipeline {
     agent any
 
     stages {
-
-        stages {
         stage('Git Checkout') {
             steps {
+                echo 'Checking out code from Git...'
                 git branch: 'jenkins', url: 'https://github.com/Ashikasalian/devops_project.git'
             }
         }
-        stage('Install Dependencies') {
+
+        stage('Compile') {
             steps {
-                echo 'Installing dependencies...'
-                sh 'npm install'
+                echo 'Compiling source code...'
+                sh 'javac HelloWorld.java' // Replace with your Java file or script
             }
         }
-        stage('Run Tests') {
-            steps {
-                echo 'Running tests...'
-                sh 'npm test'
-            }
-        }
+
         stage('Build') {
             steps {
-                echo 'Building application...'
-                sh 'npm run build'
+                echo 'Building project...'
+                sh 'jar cf HelloWorld.jar HelloWorld.class' // Simple jar creation example
             }
         }
+
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
-                sh './deploy.sh'
+                echo 'Deploying the application...'
+                sh 'echo "Deploying application to server..."'
             }
-        }
-    }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed.'
         }
     }
 }
