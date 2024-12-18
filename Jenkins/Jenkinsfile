@@ -11,6 +11,14 @@ pipeline {
             }
         }
 
+        stage('Build') {
+            steps {
+                script {
+                    sh 'mvn clean install'
+                }
+            }
+        }
+
     post {
         success {
             echo 'Build and tests successful!'
