@@ -19,31 +19,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                script {
-                    // Now it will use the configured Maven version
-                    sh 'mvn clean install'
-                }
-            }
-        }
 
-        stage('Test') {
-            steps {
-                script {
-                    // Run tests (again, adjust if necessary)
-                    sh 'mvn test'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    // Deploy the application
-                    echo 'Deploying the application...'
-                }
-            }
-        }
     }
 }
