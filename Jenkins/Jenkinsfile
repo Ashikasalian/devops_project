@@ -9,25 +9,21 @@ pipeline {
             }
         }
 
-        stage('Compile') {
+        stage('Run Script') {
             steps {
-                echo 'Compiling source code...'
-                sh 'javac HelloWorld.java' // Replace with your Java file or script
-            }
-        }
-
-        stage('Build') {
-            steps {
-                echo 'Building project...'
-                sh 'jar cf HelloWorld.jar HelloWorld.class' // Simple jar creation example
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploying the application...'
-                sh 'echo "Deploying application to server..."'
+                echo 'Running script...'
+                sh 'echo Hello, World!'
             }
         }
     }
+
+    post {
+        success {
+            echo 'Pipeline completed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
 }
+
