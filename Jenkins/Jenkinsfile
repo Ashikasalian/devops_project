@@ -1,35 +1,17 @@
 pipeline {
     agent any
 
-        stages {
-        stage('Git Checkout') {
-            steps {
-                git branch: 'jenkins', url: 'https://github.com/Ashikasalian/devops_project.git'
-            }
-        }
-        stage('Install Dependencies') {
-            steps {
-                echo 'Installing dependencies...'
-                sh 'npm install'
-            }
-        }
-        stage('Run Tests') {
-            steps {
-                echo 'Running tests...'
-                sh 'npm test'
-            }
-        }
-        stage('Build') {
-            steps {
-                echo 'Building application...'
-                sh 'npm run build'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying application...'
-                sh './deploy.sh'
+tools {
+        nodejs 'nodejs'  // 'nodejs' is the name you gave it in the Global Tool Configuration
+    }
+
+    stages{
+        stage('git checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Ashikasalian/devops_project.git'
+
+
             }
         }
     }
-    }
+}
