@@ -3,6 +3,11 @@ pipeline {
 
     agent any
 
+    tools {
+        maven 'Maven 3'  // Specify the Maven version installed in Jenkins' global tools
+    }
+
+
     stages{
         stage('git checkout'){
             steps{
