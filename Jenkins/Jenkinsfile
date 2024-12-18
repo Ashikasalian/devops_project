@@ -1,7 +1,9 @@
+
 pipeline {
+
     agent any
 
-    sstages{
+    stages{
         stage('git checkout'){
             steps{
                 git branch: 'main', url: 'https://github.com/Ashikasalian/devops_project.git'
