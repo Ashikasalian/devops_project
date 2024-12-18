@@ -46,18 +46,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            echo 'Build and tests completed successfully!'
-        }
-
-        failure {
-            echo 'Build or tests failed.'
-        }
-
-        always {
-            echo 'Cleanup activities after pipeline execution.'
-        }
-    }
 }
