@@ -18,19 +18,5 @@ pipeline {
                 }
             }
         }
-
-    post {
-        success {
-            echo 'Build and tests successful!'
-        }
-
-        failure {
-            echo 'Build or tests failed.'
-        }
-
-        always {
-            echo 'Cleaning up...'
-        }
-    }
 }
 }
