@@ -1,8 +1,6 @@
 pipeline {
     agent any
 
-    stages {
-
         stages {
         stage('Git Checkout') {
             steps {
@@ -34,14 +32,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed.'
-        }
     }
-}
-}
