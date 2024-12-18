@@ -11,29 +11,6 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                // Compile and build the project (example for a Maven project)
-                sh 'mvn clean install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Run tests (example for Maven)
-                sh 'mvn test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Example deploy command
-                echo 'Deploying the application...'
-                // Add actual deployment steps here (e.g., copy files, deploy to server, etc.)
-            }
-        }
-    }
-
     post {
         success {
             echo 'Build and tests successful!'
