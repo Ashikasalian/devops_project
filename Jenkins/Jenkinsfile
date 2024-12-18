@@ -1,15 +1,26 @@
 pipeline {
-    agent any
-
+    agent {
+        label 'Node-1'
+    }
+    tools {
+        jdk 'java-11'
+        maven 'maven'
+    }
     stages {
-        stage('Checkout') {
+        stage('Git Checkout') {
             steps {
-                script {
-                    git url: 'https://github.com/Ashikasalian/devops_project.git', branch: 'jenkins'
-                }
+                git branch: 'jenkins', url: 'https://github.com/Ashikasalian/devops_project.git'
             }
         }
-
-
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn package'
+            }
+        }
     }
 }
