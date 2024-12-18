@@ -1,27 +1,63 @@
-
 pipeline {
+    agent any  // This means the pipeline will run on any available Jenkins agent
 
-    agent any
+    environment {
+        APP_NAME = 'devops_project'
+    }
 
     tools {
         maven 'Maven 3'  // Specify the Maven version installed in Jenkins' global tools
     }
 
-
-    stages{
-        stage('git checkout'){
-            steps{
-                git branch: 'main', url: 'https://github.com/Ashikasalian/devops_project.git'
-
+    stages {
+        stage('Checkout') {
+            steps {
+                script {
+                    // Checkout code from your GitHub repository
+                    git url: 'https://github.com/Ashikasalian/devops_project.git', branch: 'jenkins'
+                }
             }
         }
 
         stage('Build') {
             steps {
                 script {
+                    // Now it will use the configured Maven version
                     sh 'mvn clean install'
                 }
             }
         }
-}
+
+        stage('Test') {
+            steps {
+                script {
+                    // Run tests (again, adjust if necessary)
+                    sh 'mvn test'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Deploy the application
+                    echo 'Deploying the application...'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and tests completed successfully!'
+        }
+
+        failure {
+            echo 'Build or tests failed.'
+        }
+
+        always {
+            echo 'Cleanup activities after pipeline execution.'
+        }
+    }
 }
