@@ -1,26 +1,43 @@
 pipeline {
-    agent {
-        label 'Node-1'
-    }
-    tools {
-        jdk 'java-11'
-        maven 'maven'
-    }
+    agent any  // This means the pipeline will run on any available Jenkins agent
+
     stages {
-        stage('Git Checkout') {
+        stage('Checkout') {
             steps {
+                // Checkout the code from your GitHub repository
                 git branch: 'jenkins', url: 'https://github.com/Ashikasalian/devops_project.git'
             }
         }
-        stage('Compile') {
-            steps {
-                sh 'mvn compile'
-            }
-        }
+
         stage('Build') {
             steps {
-                sh 'mvn package'
+                // Run the Maven build command
+                sh 'mvn clean install'
             }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests using Maven
+                sh 'mvn test'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Placeholder for deployment steps
+                echo 'Deploying the application...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and tests completed successfully!'
+        }
+
+        failure {
+            echo 'Build or tests failed.'
         }
     }
 }
